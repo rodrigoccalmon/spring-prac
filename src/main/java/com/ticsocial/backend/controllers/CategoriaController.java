@@ -32,10 +32,10 @@ public class CategoriaController {
 	@Autowired
 	private CategoriaRepository repo;
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@ApiOperation(value = "GET categoria via ID")
-	public ResponseEntity<Optional<Categoria>> findById(@PathVariable Integer id) {
-		Optional<Categoria> obj = service.findById(id);
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Categoria> find(@PathVariable Integer id) {
+		Categoria obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 
@@ -47,10 +47,20 @@ public class CategoriaController {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
+	
+	@ApiOperation(value = "Atualizar categoria via ID")
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id) {
+		Categoria obj = service.fromDTO(objDto);
+		obj.setId(id);
+		obj = service.update(obj);
+		return ResponseEntity.noContent().build();
+	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+
 }
