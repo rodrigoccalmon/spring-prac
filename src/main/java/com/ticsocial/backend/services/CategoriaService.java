@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ticsocial.backend.DTO.CategoriaDTO;
 import com.ticsocial.backend.entities.Categoria;
 import com.ticsocial.backend.repositories.CategoriaRepository;
 
@@ -19,7 +20,12 @@ public class CategoriaService {
 		Optional<Categoria> obj = repo.findById(id);
 		return obj;
 	}
-	public List<Categoria> findAll() {
-		return repo.findAll();
+	public Categoria insert(Categoria obj) {
+		obj.setId(null);
+		return repo.save(obj);
 	}
+	public Categoria fromDTO(CategoriaDTO objDto) {
+		return new Categoria(objDto.getId(), objDto.getNomeCategoria(), objDto.getDescricaoCategoria());
+	}
+	
 }
