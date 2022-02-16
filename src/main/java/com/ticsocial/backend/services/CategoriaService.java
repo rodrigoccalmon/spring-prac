@@ -15,17 +15,23 @@ public class CategoriaService {
 
 	@Autowired
 	private CategoriaRepository repo;
-	
+
 	public Optional<Categoria> findById(Integer id) {
 		Optional<Categoria> obj = repo.findById(id);
 		return obj;
 	}
+
 	public Categoria insert(Categoria obj) {
 		obj.setId(null);
 		return repo.save(obj);
 	}
+
 	public Categoria fromDTO(CategoriaDTO objDto) {
 		return new Categoria(objDto.getId(), objDto.getNomeCategoria(), objDto.getDescricaoCategoria());
 	}
-	
+
+	public void delete(Integer id) {
+		findById(id);
+		repo.deleteById(id);
+	}
 }

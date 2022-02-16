@@ -40,6 +40,7 @@ public class CategoriaController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
+	@ApiOperation(value = "Post de categoria")
 	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto) {
 		Categoria obj = service.fromDTO(objDto);
 		obj = service.insert(obj);
