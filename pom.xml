@@ -12,7 +12,7 @@
 	<artifactId>Spring-Prac</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Spring-Prac</name>
-	<description>Treino spring</description>
+	<description>Treinospring</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
